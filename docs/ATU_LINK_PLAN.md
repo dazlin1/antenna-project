@@ -113,6 +113,27 @@ the 12 V switching environment with VOM1271 drivers).
 - The VOM1271 is not suitable for the data link: as a photovoltaic MOSFET
   driver it switches far too slowly.
 
+## Decisions
+
+1. **Remote test mode is dropped for now.** The commands TST0/TST1, TUP,
+   TDN, TSC, and TSL are not implemented over the link, to save PIC program
+   memory. The frame format reserves command codes for L/C stepping so the
+   feature can be added later if the build has room. Until then, test mode
+   is entered from the ATU-100 front panel.
+2. **The fallback optocouplers stay as a backup.** They sit across the
+   Tune, A/M, and Bypass buttons (RB0 to RB2). With the link on RA6/RA7 the
+   buttons remain buttons, so the optos no longer conflict with the link.
+   The A10 restriction in `docs/ASSUMPTIONS.md` (fallback optos and the
+   serial link must not be wired at the same time) is removed. The optos
+   allow remote Tune, Auto, and Bypass even if the link or the PIC firmware
+   fails, including with stock firmware reflashed.
+3. **Firmware source lives in a fork of WA1RCT's repo, pinned by commit.**
+   Neither the N7DDC nor the WA1RCT repo carries a license file, so the
+   source stays in a GitHub fork that keeps the original attribution and
+   history rather than being copied into this repo. `atu100_firmware/`
+   records the fork URL and the pinned commit hash, so the Pico side always
+   matches a known firmware build.
+
 ## Open items
 
 1. Build the unmodified WA1RCT project in MPLAB X with free XC8 and record
