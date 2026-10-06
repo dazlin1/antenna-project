@@ -142,8 +142,9 @@ the 12 V switching environment with VOM1271 drivers).
    code, since the tuner is remote and the master shows its data.
 2. Define the exact frame format, baud rate, reply-window timing, and
    command encoding.
-3. Update the Pico side (`remote/atu_link.py`), the docs listed above, and
-   the host tests to match.
+3. Update the Pico side (`remote/atu_link.py`), the docs listed above,
+   `docs/ASSUMPTIONS.md` (remove A10 and replace decision 3), and the host
+   tests to match.
 
 ## Rules for this branch
 
